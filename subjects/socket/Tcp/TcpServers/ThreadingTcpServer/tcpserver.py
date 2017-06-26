@@ -9,7 +9,7 @@ class MyServer(SocketServer.BaseRequestHandler):
     def handle(self):
         self.request.sendall('welcome')
         while True:
-            data = self.request.recv(1024)
+            data = (self.request.recv(1024)).strip()
             if len(data) == 0: break
             print self.client_address, data
             cmd = subprocess.Popen(data, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -21,5 +21,5 @@ class MyServer(SocketServer.BaseRequestHandler):
             self.request.send(cmd_res)
 
 if __name__ == '__main__':
-    server = SocketServer.ThreadingTCPServer(('192.168.109.111', 8000), MyServer)
+    server = SocketServer.ThreadingTCPServer(('127.0.0.1', 8000), MyServer)
     server.serve_forever()

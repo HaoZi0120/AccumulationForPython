@@ -7,7 +7,7 @@ import select
 sk = socket.socket()
 sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sk.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-sk.bind(('192.168.109.111', 9999,))
+sk.bind(('127.0.0.1', 9999,))
 sk.listen(5)
 inputs = [sk, ]
 messages = {}
